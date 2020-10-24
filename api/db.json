@@ -1,0 +1,54 @@
+{
+  "clients": [
+    {
+      "id": 1,
+      "first_name": "Sebastian",
+      "second_name": "Eschweiler",
+      "email": "sebastian@codingthesmartway.com"
+    },
+    {
+      "id": 2,
+      "first_name": "Steve",
+      "second_name": "Palmer",
+      "email": "steve@codingthesmartway.com"
+    },
+    {
+      "id": 3,
+      "first_name": "Ann",
+      "second_name": "Smith",
+      "email": "ann@codingthesmartway.com"
+    },
+    {
+      "first_name": "Nestor",
+      "second_name": "Galvan",
+      "email": "nestor-91-gh@hotmail.com",
+      "id": 4
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "iPhone 12",
+      "price": "1000€",
+      "mark": "Apple"
+    },
+    {
+      "id": 2,
+      "name": "samsung galaxy 10",
+      "price": "500€",
+      "mark": "Samsung"
+    },
+    {
+      "id": 3,
+      "name": "iPhone 11",
+      "price": "900€",
+      "mark": "Apple"
+    },
+    {
+      "id": 4,
+      "name": "iPhone 10",
+      "price": "800€",
+      "mark": "Apple"
+    }
+  ]
+}
