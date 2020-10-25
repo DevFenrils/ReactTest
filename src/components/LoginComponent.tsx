@@ -54,7 +54,10 @@ class LoginComponent extends React.Component<{}, { pass: string, user: string, s
     }
     this.loginService.loginUser(user).then((res) => {
       console.log(res);
-      browserHistory.push("/home");
+      if(res.status == 200) {
+        browserHistory.push("/home");
+
+      }
 
     })
     .catch((err) => {
