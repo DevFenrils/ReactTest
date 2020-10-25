@@ -9,7 +9,6 @@ import Paper from '@material-ui/core/Paper';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -18,6 +17,9 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { browserHistory } from 'react-router';
 import { ClientsService } from "../providers/ClientsService";
 
@@ -84,6 +86,15 @@ class ClientsComponent extends React.Component<{}, { open: boolean, clients: any
         
     }
 
+    deleteClient(id) {
+        this.clientService.deleteClient(id).then((res) => {
+            console.log(res);
+            window.location.reload();
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+
     render() {
 
         return (
@@ -107,6 +118,7 @@ class ClientsComponent extends React.Component<{}, { open: boolean, clients: any
                                         <TableCell>Nombre</TableCell>
                                         <TableCell align="right">Apellido</TableCell>
                                         <TableCell align="right">Email</TableCell>
+                                        <TableCell align="right">Borrar</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -117,7 +129,13 @@ class ClientsComponent extends React.Component<{}, { open: boolean, clients: any
                                             </TableCell>
                                             <TableCell align="right">{row.second_name}</TableCell>
                                             <TableCell align="right">{row.email}</TableCell>
-                                            
+                                            <TableCell align="right">
+                                                <Tooltip title="Delete">
+                                                    <IconButton aria-label="delete" onClick={() => { this.deleteClient(row.id) }}>
+                                                        <DeleteIcon />
+                                                    </IconButton>
+                                                </Tooltip>
+                                            </TableCell>
                                         </TableRow>
                                     ))}
                                 </TableBody>

@@ -25,4 +25,11 @@ export class ProductsService {
             }),
           });
       }
+
+      public deleteProduct(id) {
+        return fetch(constants.BASE_URL + 'products/'+id, {
+            method: 'DELETE'
+          });
+      }
+     
 }

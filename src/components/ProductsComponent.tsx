@@ -9,7 +9,6 @@ import Paper from '@material-ui/core/Paper';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -18,6 +17,11 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+
+
 import { browserHistory } from 'react-router';
 import { ProductsService } from "../providers/ProductsService";
 
@@ -30,7 +34,7 @@ class ProductsComponent extends React.Component<{}, { open: boolean, products: a
 
     constructor(props) {
         super(props);
-        this.state = { open: false, products: []};
+        this.state = { open: false, products: [] };
         this.productsService = new ProductsService();
         this.handleName = this.handleName.bind(this);
         this.handlePrice = this.handlePrice.bind(this);
@@ -65,7 +69,7 @@ class ProductsComponent extends React.Component<{}, { open: boolean, products: a
     getClients() {
         this.productsService.getProducts()
             .then(response => response.json())
-            .then(data => this.setState({products: data }));
+            .then(data => this.setState({ products: data }));
     }
 
 
@@ -81,7 +85,17 @@ class ProductsComponent extends React.Component<{}, { open: boolean, products: a
         }).catch((err) => {
             console.log(err);
         });
-        
+
+    }
+
+    deleteProduct(id) {
+        this.productsService.deleteProduct(id).then((res) => {
+            console.log(res);
+            window.location.reload();
+        }).catch((err) => {
+            console.log(err);
+        });
+
     }
 
     render() {
@@ -107,6 +121,8 @@ class ProductsComponent extends React.Component<{}, { open: boolean, products: a
                                         <TableCell>Nombre</TableCell>
                                         <TableCell align="right">Precio</TableCell>
                                         <TableCell align="right">Marca</TableCell>
+                                        <TableCell align="right">Borrar</TableCell>
+
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -117,7 +133,13 @@ class ProductsComponent extends React.Component<{}, { open: boolean, products: a
                                             </TableCell>
                                             <TableCell align="right">{row.mark}</TableCell>
                                             <TableCell align="right">{row.price}</TableCell>
-                                            
+                                            <TableCell align="right">
+                                                <Tooltip title="Delete">
+                                                    <IconButton aria-label="delete" onClick={() => { this.deleteProduct(row.id) }}>
+                                                        <DeleteIcon />
+                                                    </IconButton>
+                                                </Tooltip>
+                                            </TableCell>
                                         </TableRow>
                                     ))}
                                 </TableBody>

@@ -25,4 +25,10 @@ export class ClientsService {
             }),
           });
       }
+
+      public deleteClient(id) {
+        return fetch(constants.BASE_URL + 'clients/'+id, {
+            method: 'DELETE'
+          });
+      }
 }
